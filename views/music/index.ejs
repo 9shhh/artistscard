@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <style>
+        body,
+        html {
+            background-color: #f5f5f5;
+            width: 100%;
+            height: 100%;
+        }
+
+        .input-content {
+            position: relative;
+            padding-right: 20%;
+            margin-top: 30px;
+        }
+
+        .input-content input {
+            width: 100%;
+            ;
+        }
+
+        .input-content button {
+            position: absolute;
+            top: 0;
+        }
+
+        .input-content button.btn-primary {
+            right: 13%;
+        }
+
+        .input-content button.btn-success {
+            right: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dropdown text-right mt-3">
+            <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                ID : <%=locals.userId%>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/editPassword">비밀번호 변경</a>
+                <a class="dropdown-item" href="/signOut">로그아웃</a>
+            </div>
+        </div>
+        <div class="input-content">
+            <form method="GET" action="/main">
+                <input class="form-control" type="text" id="title" name="title" placeholder="음악제목을 입력해주세요." required />
+                <button class="btn btn-primary">검색</button>
+            </form>
+            <button type="button" class="btn btn-success" onclick="location.href='/create'">음악 삽입</button>
+        </div>
+        <table class="table mt-5">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">곡제목</th>
+                    <th scope="col">앨범명</th>
+                    <th scope="col">아티스트</th>
+                    <th scope="col">음원수정</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(var i=0; i < locals.datas.length; i++){%>
+                <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=locals.datas[i].track%></td>
+                    <td><%=locals.datas[i].album%></td>
+                    <td><%=locals.datas[i].artist%></td>
+                    <td>
+                        <%if(locals.datas[i].userId === locals.userId){%>
+                        <button type="button" class="btn btn-sm btn-warning text-light"
+                            onclick="location.href='/<%=locals.datas[i].id%>/edit'">수정</button>
+                        <%}%>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

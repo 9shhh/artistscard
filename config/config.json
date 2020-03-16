@@ -1,17 +1,17 @@
 {
   "development": {
-    "username": "",
-    "password": "",
-    "database": "",
+    "username": "root",
+    "password": "12341234",
+    "database": "artistscard",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "sessionMysql": {
-    "host": "",
-    "port": "",
-    "user": "",
-    "password": "",
-    "database": ""
+    "host": "localhost",
+    "port": "3306",
+    "user": "root",
+    "password": "12341234",
+    "database": "artistscard"
   }
 }
